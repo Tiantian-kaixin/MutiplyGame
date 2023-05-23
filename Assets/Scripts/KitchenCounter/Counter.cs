@@ -19,6 +19,9 @@ public class Counter : NetworkBehaviour, IInteactable, IHolder {
     }
 
     public virtual void Inteactive(IHolder player) {
+        if (!GameManager.Instance.IsStateRunning<GamePlayingState>()) {
+            return;
+        }
         if (player.GetKitchenObj() != null) {
             if (GetKitchenObj() != null) {
                 // player 填充

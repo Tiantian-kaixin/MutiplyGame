@@ -79,6 +79,9 @@ public class CookCounter : Counter, IInteractAlternate {
     }
 
     public void InteactiveAlternate(IHolder inteactiver) {
+        if (!GameManager.Instance.IsStateRunning<GamePlayingState>()) {
+            return;
+        }
         if (curKitchenObj != null && curCookState.Value == CookStateEnum.IDLE) {
             changCookStateServerRpc(CookStateEnum.COOKING);
         }

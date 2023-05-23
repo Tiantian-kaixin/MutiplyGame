@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
 
-public class NetWorkTest : BaseGameStateUI<LobbyState> {
+public class GameLobbyUI : BaseGameStateUI<GameLobbyState> {
     public Button hostBtn;
     public Button clientBtn;
 

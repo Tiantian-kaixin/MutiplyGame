@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 
-public class WaitingForStartUI : BaseGameStateUI<WaitingToStartState> {
+public class GameWaitingForStartUI : BaseGameStateUI<WaitingToStartState> {
     [SerializeField] private TextMeshProUGUI textUI;
 
     protected override void OnEnable() {

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
-using UnityEditor.Events;
 using System.Collections.Generic;
 using System;
 
@@ -24,10 +23,11 @@ public class GameManager : MonoBehaviour {
     private void Awake() {
         Instance = this;
         stateMachine = new StateMachine<IState>();
-        stateMachine.AddState(new LobbyState(stateMachine, this));
+        stateMachine.AddState(new GameLobbyState(stateMachine, this));
         stateMachine.AddState(new WaitingToStartState(stateMachine, this));
-        stateMachine.AddState(new PlayingState(stateMachine, this));
+        stateMachine.AddState(new GamePlayingState(stateMachine, this));
         stateMachine.AddState(new GameOverState(stateMachine, this));
+        stateMachine.AddState(new GamePauseState(stateMachine, this));
     }
 
     private void OnEnable() {
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Start() {
-        stateMachine.ChangeState<LobbyState>();
+        stateMachine.ChangeState<GameLobbyState>();
     }
 
     private void _OnGameStateChange(IState state) {
@@ -60,6 +60,10 @@ public class GameManager : MonoBehaviour {
 
     public void PlayTimeChange(float time) {
         OnPlayingTimeChange?.Invoke(time);
+    }
+
+    public bool IsStateRunning<T>() where T : IState {
+        return stateMachine.IsStateRunning<T>();
     }
 }
 

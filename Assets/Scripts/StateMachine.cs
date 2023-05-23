@@ -36,6 +36,10 @@ public class StateMachine<T> where T : IState {
         curState.OnEnter();
     }
 
+    public bool IsStateRunning<Type>() where Type : T {
+        return curState is Type;
+    }
+
     public List<T> GetStates() {
         return states;
     }

@@ -8,6 +8,7 @@ public class PlayerInputManager : MonoBehaviour {
     public Vector2 Move => playerInputActions.Player.Move.ReadValue<Vector2>();
     public event Action OnInteractPerform;
     public event Action OnInteractAlternatePerform;
+    public event Action OnTogglePausePerform;
 
     private PlayerInputActions playerInputActions;
     private void Awake() {
@@ -19,6 +20,7 @@ public class PlayerInputManager : MonoBehaviour {
     private void OnEnable() {
         playerInputActions.Player.Interact.performed += _InteractPerformed;
         playerInputActions.Player.InteractAlternate.performed += _InteractAlternatePerformed;
+        playerInputActions.Player.TogglePause.performed += _TogglePausePerform;
     }
 
     private void OnDisable() {
@@ -31,6 +33,10 @@ public class PlayerInputManager : MonoBehaviour {
     }
     private void _InteractAlternatePerformed(InputAction.CallbackContext obj) {
         OnInteractAlternatePerform?.Invoke();
+    }
+
+    private void _TogglePausePerform(InputAction.CallbackContext obj) {
+        OnTogglePausePerform?.Invoke();
     }
 }
 
