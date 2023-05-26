@@ -12,7 +12,7 @@ public class GameOverUI : BaseGameStateUI<GameOverState> {
         base.OnEnable();
         DeliveryManager.Instance.OnCompleteOrder += onAddScore;
         replayBtn.onClick.AddListener(() => {
-            GameManager.Instance.ChangeGameState<WaitingToStartState>();
+            GameManager.Instance.ChangeGameState(GameState.WaitingToStart);
         });
     }
 

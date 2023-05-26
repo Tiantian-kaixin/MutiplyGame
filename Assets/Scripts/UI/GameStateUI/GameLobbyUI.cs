@@ -11,12 +11,12 @@ public class GameLobbyUI : BaseGameStateUI<GameLobbyState> {
     protected override void Start() {
         hostBtn.onClick.AddListener(() => {
             NetworkManager.Singleton.StartHost();
-            GameManager.Instance.ChangeGameState<WaitingToStartState>();
+            GameManager.Instance.ChangeGameState(GameState.WaitingToStart);
             ActiveUI(false);
         });
         clientBtn.onClick.AddListener(() => {
             NetworkManager.Singleton.StartClient();
-            GameManager.Instance.ChangeGameState<WaitingToStartState>();
+            GameManager.Instance.ChangeGameState(GameState.WaitingToStart);
             ActiveUI(false);
         });
     }

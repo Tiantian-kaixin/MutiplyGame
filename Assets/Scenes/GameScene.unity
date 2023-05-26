@@ -1537,6 +1537,8 @@ GameObject:
   m_Component:
   - component: {fileID: 522958061}
   - component: {fileID: 522958062}
+  - component: {fileID: 522958063}
+  - component: {fileID: 522958064}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1574,6 +1576,34 @@ MonoBehaviour:
   <gameSetting>k__BackingField:
     PlayDuration: 10
     ReadyCount: 3
+--- !u!114 &522958063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522958060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2455709751
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &522958064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522958060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a257d24785b914f2b8c40d3206634b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &523369903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4589716710238282923, guid: 9a9137fa2b035d34e881701d2c178192, type: 3}
@@ -1627,6 +1657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 535077651}
   - component: {fileID: 535077650}
+  - component: {fileID: 535077652}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -1661,6 +1692,18 @@ Transform:
   m_Father: {fileID: 1367660987}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &535077652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535077649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a257d24785b914f2b8c40d3206634b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &582360455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2606,6 +2649,7 @@ GameObject:
   - component: {fileID: 937980645}
   - component: {fileID: 937980644}
   - component: {fileID: 937980647}
+  - component: {fileID: 937980648}
   m_Layer: 0
   m_Name: DeliveryManager
   m_TagString: Untagged
@@ -2659,6 +2703,18 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &937980648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937980643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a257d24785b914f2b8c40d3206634b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &956054570 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4589716710238282922, guid: c4e141bc61e807b4b832b850d92f5fd7, type: 3}
@@ -2809,6 +2865,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1042447181}
   - component: {fileID: 1042447182}
+  - component: {fileID: 1042447183}
   m_Layer: 0
   m_Name: KitchenObjManager
   m_TagString: Untagged
@@ -2866,6 +2923,18 @@ MonoBehaviour:
     kitchenItemSO: {fileID: 11400000, guid: 804566ffa559c40f6bb9a2ff14c8d21d, type: 2}
   - kitchenObjEnum: 10
     kitchenItemSO: {fileID: 11400000, guid: 22ad6c3048ce94644be1665d974db418, type: 2}
+--- !u!114 &1042447183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042447180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a257d24785b914f2b8c40d3206634b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1128350843 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4589716710238282922, guid: d72bee846803d074784ffb8f64e993ca, type: 3}

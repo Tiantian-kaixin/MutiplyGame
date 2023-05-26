@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEditor;
 using System.Collections.Generic;
 using System;
+using Unity.Netcode;
 
 public enum GameState {
     Lobby,
@@ -12,12 +13,13 @@ public enum GameState {
     GameOver,
 }
 
-public class GameManager : MonoBehaviour {
+public class GameManager : NetworkBehaviour {
     public static GameManager Instance { private set; get; }
     [field: SerializeField] public GameSetting gameSetting { private set; get; }
     public event Action<IState> OnGameStateChange;
     public event Action<float> OnWaitingTimeChange;
     public event Action<float> OnPlayingTimeChange;
+    private NetworkVariable<GameState> gameStateVariable = new NetworkVariable<GameState>(GameState.Lobby);
 
     private StateMachine<IState> stateMachine = new StateMachine<IState>();
     private void Awake() {
@@ -28,6 +30,16 @@ public class GameManager : MonoBehaviour {
         stateMachine.AddState(new GamePlayingState(stateMachine, this));
         stateMachine.AddState(new GameOverState(stateMachine, this));
         stateMachine.AddState(new GamePauseState(stateMachine, this));
+    }
+
+    public override void OnNetworkSpawn() {
+        base.OnNetworkSpawn();
+        gameStateVariable.OnValueChanged += _OnGameStateVariableChanged;
+    }
+
+    public override void OnNetworkDespawn() {
+        base.OnNetworkDespawn();
+        gameStateVariable.OnValueChanged -= _OnGameStateVariableChanged;
     }
 
     private void OnEnable() {
@@ -46,11 +58,31 @@ public class GameManager : MonoBehaviour {
         OnGameStateChange?.Invoke(state);
     }
 
+    private void _OnGameStateVariableChanged(GameState previousValue, GameState newValue) {
+        switch (newValue) {
+            case GameState.Lobby:
+                ChangeGameState<GameLobbyState>();
+                break;
+            case GameState.Playing:
+                ChangeGameState<GamePlayingState>();
+                break;
+            case GameState.WaitingToStart:
+                ChangeGameState<WaitingToStartState>();
+                break;
+            case GameState.Paused:
+                ChangeGameState<GamePauseState>();
+                break;
+            case GameState.GameOver:
+                ChangeGameState<GameOverState>();
+                break;
+        }
+    }
+
     private void Update() {
         stateMachine.Update();
     }
 
-    public void ChangeGameState<T>() where T : IState {
+    private void ChangeGameState<T>() where T : IState {
         stateMachine.ChangeState<T>();
     }
 
@@ -64,6 +96,14 @@ public class GameManager : MonoBehaviour {
 
     public bool IsStateRunning<T>() where T : IState {
         return stateMachine.IsStateRunning<T>();
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void ChangeGameStateNetVariableServerRpc(GameState gameState) {
+        gameStateVariable.Value = gameState;
+    }
+
+    public void ChangeGameState(GameState gameState) {
+        ChangeGameStateNetVariableServerRpc(gameState);
     }
 }
 

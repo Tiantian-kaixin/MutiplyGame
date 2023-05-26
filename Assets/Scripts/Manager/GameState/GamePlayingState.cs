@@ -24,13 +24,13 @@ public class GamePlayingState : BaseGameState {
     public override void OnUpdate() {
         curTime += Time.deltaTime;
         if (curTime >= owner.gameSetting.PlayDuration) {
-            stateMachine.ChangeState<GameOverState>();
+            GameManager.Instance.ChangeGameState(GameState.GameOver);
             return;
         }
         owner.PlayTimeChange(curTime);
     }
     private void _OnToggleGamePause() {
-        stateMachine.ChangeState<GamePauseState>();
+        GameManager.Instance.ChangeGameState(GameState.Paused);
         isInterrupt = true;
     }
 }

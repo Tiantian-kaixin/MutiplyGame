@@ -21,7 +21,7 @@ public class GamePauseState : BaseGameState {
     }
 
     private void _OnToggleGamePause() {
-        stateMachine.ChangeState<GamePlayingState>();
+        GameManager.Instance.ChangeGameState(GameState.Playing);
     }
 }
 
