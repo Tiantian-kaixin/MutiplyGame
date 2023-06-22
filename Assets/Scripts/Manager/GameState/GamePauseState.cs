@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GamePauseState : BaseGameState {
-    public GamePauseState(StateMachine<IState> stateMachine, GameManager owner) : base(stateMachine, owner) {
+    public GamePauseState(StateMachine<IState> stateMachine, MyGameManager owner) : base(stateMachine, owner) {
         stateEnum = GameState.Paused;
     }
 
@@ -21,7 +21,7 @@ public class GamePauseState : BaseGameState {
     }
 
     private void _OnToggleGamePause() {
-        GameManager.Instance.ChangeGameState(GameState.Playing);
+        MyGameManager.Instance.ChangeGameState(GameState.Playing);
     }
 }
 

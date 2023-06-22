@@ -8,7 +8,7 @@ public class GamePlayingTimeUI : BaseGameStateUI<GamePlayingState> {
 
     protected override void OnEnable() {
         base.OnEnable();
-        GameManager.Instance.OnPlayingTimeChange += OnPlayingTimeChange;
+        MyGameManager.Instance.OnPlayingTimeChange += OnPlayingTimeChange;
     }
 
     protected override void _OnGameStateChange(IState state) {
@@ -17,11 +17,11 @@ public class GamePlayingTimeUI : BaseGameStateUI<GamePlayingState> {
 
     protected override void OnDisable() {
         base.OnDisable();
-        GameManager.Instance.OnPlayingTimeChange -= OnPlayingTimeChange;
+        MyGameManager.Instance.OnPlayingTimeChange -= OnPlayingTimeChange;
     }
 
     private void OnPlayingTimeChange(float curTime) {
-        clockImg.fillAmount = Math.Min(curTime / GameManager.Instance.gameSetting.PlayDuration, 1);
+        clockImg.fillAmount = Math.Min(curTime / MyGameManager.Instance.gameSetting.PlayDuration, 1);
     }
 }
 

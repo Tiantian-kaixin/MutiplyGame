@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameLobbyState : State<GameState, GameManager> {
-    public GameLobbyState(StateMachine<IState> stateMachine, GameManager owner) : base(stateMachine, owner) {
+public class GameLobbyState : State<GameState, MyGameManager> {
+    public GameLobbyState(StateMachine<IState> stateMachine, MyGameManager owner) : base(stateMachine, owner) {
         stateEnum = GameState.Lobby;
     }
 

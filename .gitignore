@@ -7,6 +7,9 @@ Temp/
 Library/
 Logs/
 obj/
+_localBuild/
+_serverBuild.zip
+_serverBuild/
 _build/
 Packages/
 ProjectSettings/

@@ -13,8 +13,8 @@ public enum GameState {
     GameOver,
 }
 
-public class GameManager : NetworkBehaviour {
-    public static GameManager Instance { private set; get; }
+public class MyGameManager : NetworkBehaviour {
+    public static MyGameManager Instance { private set; get; }
     [field: SerializeField] public GameSetting gameSetting { private set; get; }
     public event Action<IState> OnGameStateChange;
     public event Action<float> OnWaitingTimeChange;
@@ -35,18 +35,12 @@ public class GameManager : NetworkBehaviour {
     public override void OnNetworkSpawn() {
         base.OnNetworkSpawn();
         gameStateVariable.OnValueChanged += _OnGameStateVariableChanged;
+        stateMachine.OnStateChange += _OnGameStateChange;
     }
 
     public override void OnNetworkDespawn() {
         base.OnNetworkDespawn();
         gameStateVariable.OnValueChanged -= _OnGameStateVariableChanged;
-    }
-
-    private void OnEnable() {
-        stateMachine.OnStateChange += _OnGameStateChange;
-    }
-
-    private void OnDisable() {
         stateMachine.OnStateChange -= _OnGameStateChange;
     }
 
@@ -59,6 +53,7 @@ public class GameManager : NetworkBehaviour {
     }
 
     private void _OnGameStateVariableChanged(GameState previousValue, GameState newValue) {
+        Debug.Log("_OnGameStateVariableChanged:" + newValue.ToString());
         switch (newValue) {
             case GameState.Lobby:
                 ChangeGameState<GameLobbyState>();
@@ -97,13 +92,24 @@ public class GameManager : NetworkBehaviour {
     public bool IsStateRunning<T>() where T : IState {
         return stateMachine.IsStateRunning<T>();
     }
+
     [ServerRpc(RequireOwnership = false)]
     private void ChangeGameStateNetVariableServerRpc(GameState gameState) {
+        Debug.Log("server rpc:" + gameState.ToString());
+        gameStateVariable.Value = gameState;
+        ChangeGameStateNetVariableClientRpc(gameState);
+    }
+
+    [ClientRpc]
+    private void ChangeGameStateNetVariableClientRpc(GameState gameState) {
+        Debug.Log("client rpc:" + gameState.ToString());
         gameStateVariable.Value = gameState;
     }
 
     public void ChangeGameState(GameState gameState) {
+        Debug.Log("ChangeGameState1:" + gameState.ToString() + " " + IsOwner);
         ChangeGameStateNetVariableServerRpc(gameState);
+        Debug.Log("ChangeGameState2:" + gameState.ToString() + " " + IsOwner);
     }
 }
 

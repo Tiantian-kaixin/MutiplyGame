@@ -5,7 +5,7 @@ public class GamePlayingState : BaseGameState {
     private float curTime;
     private bool isInterrupt = false;
 
-    public GamePlayingState(StateMachine<IState> stateMachine, GameManager owner) : base(stateMachine, owner) {
+    public GamePlayingState(StateMachine<IState> stateMachine, MyGameManager owner) : base(stateMachine, owner) {
         stateEnum = GameState.Playing;
     }
 
@@ -24,13 +24,13 @@ public class GamePlayingState : BaseGameState {
     public override void OnUpdate() {
         curTime += Time.deltaTime;
         if (curTime >= owner.gameSetting.PlayDuration) {
-            GameManager.Instance.ChangeGameState(GameState.GameOver);
+            MyGameManager.Instance.ChangeGameState(GameState.GameOver);
             return;
         }
         owner.PlayTimeChange(curTime);
     }
     private void _OnToggleGamePause() {
-        GameManager.Instance.ChangeGameState(GameState.Paused);
+        MyGameManager.Instance.ChangeGameState(GameState.Paused);
         isInterrupt = true;
     }
 }

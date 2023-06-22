@@ -21,7 +21,7 @@ public class DeliveryManager : NetworkBehaviour {
     }
 
     private void Update() {
-        if (!GameManager.Instance.IsStateRunning<GamePlayingState>()) {
+        if (!MyGameManager.Instance.IsStateRunning<GamePlayingState>()) {
             return;
         }
         if (maxRecipeNum <= recipeDatas.Count) {

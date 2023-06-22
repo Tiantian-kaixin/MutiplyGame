@@ -19,7 +19,8 @@ public class Counter : NetworkBehaviour, IInteactable, IHolder {
     }
 
     public virtual void Inteactive(IHolder player) {
-        if (!GameManager.Instance.IsStateRunning<GamePlayingState>()) {
+        Debug.Log(!MyGameManager.Instance.IsStateRunning<GamePlayingState>());
+        if (!MyGameManager.Instance.IsStateRunning<GamePlayingState>()) {
             return;
         }
         if (player.GetKitchenObj() != null) {

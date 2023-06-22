@@ -9,12 +9,12 @@ public class GameWaitingForStartUI : BaseGameStateUI<WaitingToStartState> {
 
     protected override void OnEnable() {
         base.OnEnable();
-        GameManager.Instance.OnWaitingTimeChange += updateUI;
+        MyGameManager.Instance.OnWaitingTimeChange += updateUI;
     }
 
     protected override void OnDisable() {
         base.OnDisable();
-        GameManager.Instance.OnWaitingTimeChange -= updateUI;
+        MyGameManager.Instance.OnWaitingTimeChange -= updateUI;
     }
 
     private void updateUI(float count) {

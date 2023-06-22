@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 public class MainMenu : MonoBehaviour {
     [SerializeField] private Button startBtn;

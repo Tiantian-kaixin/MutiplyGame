@@ -5,7 +5,7 @@ using System;
 public abstract class BaseGameStateUI<T> : MonoBehaviour where T : IState {
 
     protected virtual void Start() {
-        GameManager.Instance.OnGameStateChange += _OnGameStateChange;
+        MyGameManager.Instance.OnGameStateChange += _OnGameStateChange;
         ActiveUI(false);
     }
     protected virtual void OnEnable() {
@@ -15,7 +15,7 @@ public abstract class BaseGameStateUI<T> : MonoBehaviour where T : IState {
     }
 
     private void OnDestroy() {
-        GameManager.Instance.OnGameStateChange -= _OnGameStateChange;
+        MyGameManager.Instance.OnGameStateChange -= _OnGameStateChange;
     }
 
     protected virtual void _OnGameStateChange(IState state) {

@@ -3,20 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 
 public class GameLobbyUI : BaseGameStateUI<GameLobbyState> {
-    public Button hostBtn;
+    public Button serverBtn;
     public Button clientBtn;
+    public Button hostBtn;
 
     protected override void Start() {
+#if DEDICATED_SERVER
+        Debug.Log("excape GameLobbyUI");
+        //UnityTransport unityTransport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+        //unityTransport.SetConnectionData("111.231.29.242", 7777, "0,0,0,0");
+        MultiplayerManager.Instance.StartServer();
+        GameManager.Instance.ChangeGameState(GameState.WaitingToStart);
+        ActiveUI(false);
+#endif
         hostBtn.onClick.AddListener(() => {
-            NetworkManager.Singleton.StartHost();
-            GameManager.Instance.ChangeGameState(GameState.WaitingToStart);
+            MultiplayerManager.Instance.StartHost();
+            MyGameManager.Instance.ChangeGameState(GameState.WaitingToStart);
+            ActiveUI(false);
+        });
+        serverBtn.onClick.AddListener(() => {
+            MultiplayerManager.Instance.StartServer();
             ActiveUI(false);
         });
         clientBtn.onClick.AddListener(() => {
-            NetworkManager.Singleton.StartClient();
-            GameManager.Instance.ChangeGameState(GameState.WaitingToStart);
+            MultiplayerManager.Instance.StartClient();
             ActiveUI(false);
         });
     }
