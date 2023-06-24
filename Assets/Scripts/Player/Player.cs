@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using Unity.Netcode;
+using Unity.VisualScripting;
 
 public partial class Player : NetworkBehaviour {
 
@@ -20,9 +21,17 @@ public partial class Player : NetworkBehaviour {
 
     }
 
+    public override void OnNetworkSpawn() {
+        base.OnNetworkSpawn();
+    }
+    private bool isF = false;
     private void Update() {
         if (!IsOwner) {
             return;
+        }
+        if (!isF) {
+            isF = true;
+            MyGameManager.Instance.ChangeGameState(GameState.WaitingToStart);
         }
         playerCoreComponents.ForEach(comp => {
             comp.Update();

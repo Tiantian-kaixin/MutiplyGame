@@ -16,7 +16,6 @@ public class GameLobbyUI : BaseGameStateUI<GameLobbyState> {
         //UnityTransport unityTransport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         //unityTransport.SetConnectionData("111.231.29.242", 7777, "0,0,0,0");
         MultiplayerManager.Instance.StartServer();
-        GameManager.Instance.ChangeGameState(GameState.WaitingToStart);
         ActiveUI(false);
 #endif
         hostBtn.onClick.AddListener(() => {

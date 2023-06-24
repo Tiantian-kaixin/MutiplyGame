@@ -35,7 +35,6 @@ public class MultiplayerManager : NetworkBehaviour {
 
     public void StartClient() {
         NetworkManager.Singleton.StartClient();
-        MyGameManager.Instance.ChangeGameState(GameState.WaitingToStart);
     }
 
     private void OnClientConnectedCallback(ulong obj) {
